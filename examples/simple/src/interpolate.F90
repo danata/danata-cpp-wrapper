@@ -2,7 +2,8 @@ program interpolate
 
 	implicit none
 
-	real, parameter :: PI = 4.0*atan(1.0)
+#include "params.inc"
+
 	real, allocatable, dimension(:) :: x
 	real, allocatable, dimension(:) :: y
 	integer i
@@ -15,10 +16,14 @@ program interpolate
 		y(i) = sin(x(i))
 	end do
 
+#ifdef CHECK
 	if ( (VAL < 0) .OR. (VAL > 2) ) then
 		print *, 'Input value should be between 0 and 2, but ', VAL
 		stop -1
 	end if 
+#else
+	print *, 'CHECK is passed.'
+#endif
 
 	print *, 'Interpolation value of SIN(',VAL,'* PI ) = ', interp(x, y, VAL*PI)
 
