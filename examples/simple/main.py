@@ -1,8 +1,5 @@
 """This module draw c preprocessing result using NetworkX drawing."""
 
-__license__ = "Youngsung Kim"
-__docformat__ = 'reStructuredText'
-
 def main():
     """draws a graph of c-preprocessed using danata-cpp-wrapper
 
@@ -19,9 +16,10 @@ def main():
     import networkx as nx
     import matplotlib.pyplot as plt
     import danatacppwrapper as dcw
+    import danata
 
-    G = dcw.read(sys.argv[1:]) 
-    nx.draw_networkx(G)
+    tree = dcw.read(sys.argv[1:]) 
+    nx.draw_networkx(tree, danata.tree_layout(tree))
     plt.show()
 
 if __name__ == "__main__":
